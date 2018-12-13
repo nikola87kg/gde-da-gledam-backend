@@ -5,7 +5,7 @@ var router = express.Router();
 // Controllers
 const LinkController = require("../controllers/linkController")
 
-router.post("/link", LinkController.getAll);
-router.post("/link", LinkController.post);
+router.get("/", LinkController.getAll);
+router.post("/", LinkController.post);
 
 module.exports = router;

@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const authRoute = require("./routes/authRoute");
 const linkRoute = require("./routes/linkRoute");
 
@@ -13,9 +12,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 /* CORS */
 app.use(function(req, res, next) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.setHeader("Access-Control-Allow-Methods","POST, GET, PATCH, PUT, DELETE, OPTIONS" );
+    res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PATCH, PUT, DELETE, OPTIONS" );
+    res.setHeader("Access-Control-Allow-Credentials", "true" );
     next();
 });
 
