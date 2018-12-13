@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const authRoute = require("./routes/authRoute");
+const linkRoute = require("./routes/linkRoute");
 
 /* CREATE EXPRESS APP */
 const app = express();
@@ -20,6 +21,7 @@ app.use(function(req, res, next) {
 
 /* ROUTING */
 app.use("/api/auth", authRoute);
+app.use("/api/link", linkRoute);
 
 /* EXPORT EXPRESS APP */
 module.exports = app;
