@@ -7,10 +7,9 @@ var Schema = mongoose.Schema;
 var linkSchema = new Schema({
     name:           {type: String, required: true, unique: true},
     link:           {type: String, required: true},
-    vip:            {type: Boolean, default: false},
+    icon:           {type: String, default: false},
     category:       {type: String},
-    description:    {type: String},
-    slug:           {type: String, required: true, trim: true},
+    vip:            {type: Boolean, default: false},
     counter:        {type: Number, default: 1},
 }, {timestamps: true});
 
