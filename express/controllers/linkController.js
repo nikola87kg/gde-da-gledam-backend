@@ -50,3 +50,20 @@ exports.getAll = async (req, res, next) => {
         console.error("\x1b[41m", 'Error during getting the list --> ', e,'\x1b[0m');
     }
 }
+
+/* DELETE LINK */
+exports.delete = async (req, res, next) => {
+
+    try {
+        /* Query to DB - DELETE data */
+        const deletedData = await LinkModel.findOneAndDelete( {  _id: req.params.id } );
+
+        /* Send response with updated object */
+        res.status(200).json( deletedData )
+    } catch(e) {
+
+        /* Send response with error object */
+        res.status(500).json(e);
+        console.error("\x1b[41m", 'Error during deleting an object --> ', e,'\x1b[0m');
+    }
+}

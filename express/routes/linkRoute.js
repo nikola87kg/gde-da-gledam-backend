@@ -6,6 +6,7 @@ var router = express.Router();
 const LinkController = require("../controllers/linkController")
 
 router.get("/", LinkController.getAll);
+router.delete("/:id", LinkController.delete);
 router.post("/", LinkController.post);
 
 module.exports = router;
