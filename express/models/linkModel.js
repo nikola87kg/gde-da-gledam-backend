@@ -7,7 +7,6 @@ var Schema = mongoose.Schema;
 var linkSchema = new Schema({
     name:           {type: String, required: true, unique: true},
     link:           {type: String, required: true},
-    icon:           {type: String, default: false},
     category:       {type: String},
     vip:            {type: Boolean, default: false},
     counter:        {type: Number, default: 1},

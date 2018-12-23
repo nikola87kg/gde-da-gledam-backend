@@ -3,7 +3,7 @@ var LinkModel = require("../models/linkModel");
 
 
 /* CREATE NEW */
-exports.post = async (req, res, next) => {
+exports.create = async (req, res, next) => {
 
     try {
         /* Create an instance */
@@ -11,8 +11,7 @@ exports.post = async (req, res, next) => {
             name: req.body.name,
             link: req.body.link,
             category: req.body.category,
-            vip: req.body.vip,
-            icon: req.body.icon,
+            vip: req.body.vip
         });
 
         /* Save instance to DB */
@@ -55,7 +54,7 @@ exports.getAll = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
 
     try {
-        /* Query to DB - DELETE data */
+        /* Query to DB - DELETE */
         const deletedData = await LinkModel.findOneAndDelete( {  _id: req.params.id } );
 
         /* Send response with updated object */
@@ -65,5 +64,33 @@ exports.delete = async (req, res, next) => {
         /* Send response with error object */
         res.status(500).json(e);
         console.error("\x1b[41m", 'Error during deleting an object --> ', e,'\x1b[0m');
+    }
+}
+
+
+/* UPDATE LINK */
+exports.update = async (req, res, next) => {
+    try {
+
+        const instance = {
+            name: req.body.name,
+            link: req.body.link,
+            category: req.body.category,
+            vip: req.body.vip
+        };
+
+        /* Query to DB - PUT  */
+        query = { _id: req.params.id }
+        await LinkModel.findOneAndUpdate( query, { $set: instance } )
+        const updatedLink = await LinkModel.findOne( { _id: req.params.id } )
+
+        /* Send response with updated object */
+        res.status(200).json( updatedLink )
+
+    } catch(e) {
+
+        /* Send response with error object */
+        res.status(500).json(e);
+        console.error("\x1b[41m", 'Error during updating an object --> ', e,'\x1b[0m');
     }
 }
