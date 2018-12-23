@@ -42,9 +42,12 @@ io.on('connection', (socket) => {
         console.log('user disconnected');
     });
 
-    socket.on('message', (message) => {
-        console.log("Message Received: " + message);
-        io.emit('message', {id:socket.id, message: message});
+    socket.on('message', data => {
+        io.emit("message", {
+            id: socket.id,
+            message: data.message,
+            name: data.name
+        });
     });
 });
 
