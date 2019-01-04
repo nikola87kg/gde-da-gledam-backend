@@ -31,22 +31,17 @@ server.listen(port, () => {
 
 /* SOCKET */
 const io = require('socket.io')(server);
+const mainNameSpace = io.of('/')
 
-io.on('connection', (socket) => {
-
+mainNameSpace.on('connection', (socket) => {
     console.log('user connected', socket.id);
-
     socket.emit('id', socket.id);
-
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-    });
-
+    socket.on('disconnect', () => console.log('user disconnected') );
     socket.on('message', data => {
-        io.emit("message", {
-            id: socket.id,
-            message: data.message,
-            name: data.name
+        mainNameSpace.emit("message", {
+            id:         socket.id,
+            message:    data.message,
+            name:       data.name
         });
     });
 });
